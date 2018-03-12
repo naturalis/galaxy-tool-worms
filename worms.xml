@@ -1,0 +1,47 @@
+<tool id="worms" name="worms API">
+<description>Synonyms and gene check</description>
+<command interpreter="bash">
+worms.sh
+$input
+$output
+$output_log
+$worms_check
+$fuzzy_klasse_check
+$klasse_fasta
+$output_klasse_sequence
+$bold_fasta
+$output_bold_sequence
+
+</command>
+
+<inputs>
+	<param format="txt" name="input" type="data" label="text file containing species names"/>
+	<param name="worms_check" type="boolean" label="Check the WoRMS database" checked="yes" truevalue="yes" falsevalue="no"/>
+	<param name="fuzzy_klasse_check" type="boolean" label="Fuzzy check the klasse database" checked="yes" truevalue="yes" falsevalue="no"/>
+	<param name="klasse_fasta" type="boolean" label="Fasta output for found klasse sequences" checked="yes" truevalue="yes" falsevalue="no"/>
+	<param name="bold_fasta" type="boolean" label="Fasta output for found bold sequences" checked="yes" truevalue="yes" falsevalue="no"/>
+</inputs>
+
+	
+<outputs>
+	
+	<data format="tabular" name="output" label="$input.display_name worms" />
+	<data format="txt" name="output_log" label="$input.display_name worms log" />
+	<data format="fasta" name="output_klasse_sequence" label="$input.display_name klasse fasta">
+		<filter>klasse_fasta</filter>
+	</data>
+	<data format="fasta" name="output_bold_sequence" label="$input.display_name bold fasta">
+		<filter>bold_fasta</filter>
+	</data>
+
+</outputs>
+<tests>
+<test>
+<param name="test_input" value="test_input.txt"/>
+<output name="test_outout" file="test_output.txt"/>
+</test>
+</tests>
+<help>
+Synonyms and gene check
+</help>
+</tool>
